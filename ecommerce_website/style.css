@@ -5,4 +5,9 @@ padding:0;
 box-sizing:border-box;
 scroll-padding-top:2rem;
 list-style:none;
+text-decoration: none;
+scroll-behavior: smooth;
+font-family :"Poppins",sans-serif;
+
+
 }
