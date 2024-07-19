@@ -4,7 +4,7 @@ async function loadPIZZAS(){
     const pizzas=await productOperations.loadProducts();
     console.log(pizzas);
     for(let pizza of pizzas){
-        prepareCard();
+        prepareCard(pizza);
 
     }
 
@@ -18,7 +18,7 @@ loadPIZZAS();
   <a href="#" class="btn btn-primary">Go somewhere</a>
 </div>
 </div> */
-function prepareCard(){
+function prepareCard(pizza){
     const outputDiv=document.querySelector('#output')
 
 
@@ -43,7 +43,7 @@ function prepareCard(){
  // Create the card title
  const cardTitle = document.createElement('h5');
  cardTitle.className = 'card-title';
- cardTitle.textContent = 'Card title';
+ cardTitle.textContent = pizza.name;
 
  // Create the card text paragraph
  const cardText = document.createElement('p');
@@ -55,15 +55,19 @@ function prepareCard(){
  cardButton.className = 'btn btn-primary';
  cardButton.href = '#';
  cardButton.textContent = 'Go somewhere';
+ colBody.appendChild(card);
+ card.appendChild(cardBody);
+ card.appendChild(cardImg);
 
  // Append the elements to the card body
  cardBody.appendChild(cardTitle);
+
  cardBody.appendChild(cardText);
  cardBody.appendChild(cardButton);
 
  // Append the image and card body to the main card div
- card.appendChild(cardImg);
- card.appendChild(cardBody);
+
+
  outputDiv.appendChild(colBody);
 };
  
