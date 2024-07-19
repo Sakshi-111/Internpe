@@ -1,11 +1,11 @@
-class product{
-    constructor(id, name, menu_description,price,url){
+class Product{
+    constructor(id, name, desc , price, url){
         this.id = id;
         this.name = name;
-        this.menu_description = menu_description;
+        this.desc = desc;
         this.price = price;
         this.url = url;
-
+        this.isAddedInCart = false;
     }
 }
-export default product;
+export default Product;

@@ -1,75 +1,64 @@
-import productOperations from "../SCRIPTS/SERVICES/PRODUCT_OP.JS";
- 
-async function loadPIZZAS(){
-    const pizzas=await productOperations.loadProducts();
-    console.log(pizzas);
-    for(let pizza of pizzas){
-        prepareCard(pizza);
+// Glue B/w View and Model
+// Controller UI I/O
 
-    }
+import readAllProducts from "../SCRIPTS/SERVICES/PRODUCT_OP.JS";
+
+/*
+<div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <img src="https://img.freepik.com/free-photo/top-view-pepperoni-pizza-with-mushroom-sausages-bell-pepper-olive-corn-black-wooden_141793-2158.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">Card title</h5>
+                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                      <a href="#" class="btn btn-primary">Add to Cart</a>
+                    </div>
+                  </div>
+                </div>
+*/
+
+function addToCart(){
+    console.log("Add to Cart Call ", this);
+}
+
+function printPizza(product){
+    const colDiv = document.createElement('div'); //<div>
+    colDiv.className = 'col-4';
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    cardDiv.style = 'width: 18rem;';
+    colDiv.appendChild(cardDiv);
+    const img = document.createElement('img');
+    img.src = product.url;
+    cardDiv.appendChild(img);
+    const cardBody = document.createElement('div');
+    cardBody.className = 'card-body';
+    cardDiv.appendChild(cardBody);
+    const h5 = document.createElement('h5');
+    h5.className  = 'card-title';
+    h5.innerText = product.name +" Rs "+product.price;
+    const pTag = document.createElement('p');
+    pTag.innerText  = product.desc;
+    pTag.className = 'card-text';
+    const button = document.createElement('button');
+    button.className = 'btn btn-primary';
+    button.innerText = 'Add to Cart';
+    button.addEventListener('click',addToCart);
+    cardBody.appendChild(h5);
+    cardBody.appendChild(pTag);
+    cardBody.appendChild(button);
+    const outputDiv = document.querySelector('#output');
+    outputDiv.appendChild(colDiv);
+
 
 }
-loadPIZZAS();
-/* <div class="card" style="width: 18rem;">
-<img src="..." class="card-img-top" alt="...">
-<div class="card-body">
-  <h5 class="card-title">Card title</h5>
-  <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-  <a href="#" class="btn btn-primary">Go somewhere</a>
-</div>
-</div> */
-function prepareCard(pizza){
-    const outputDiv=document.querySelector('#output')
 
-
-//Create the main column div 
-  const colBody=document.createElement('div');
-  colBody.className='col-4';
- // Create the main card div
- const card = document.createElement('div');
- card.className = 'card';
- card.style.width = '18rem';
-
- // Create the image element
- const cardImg = document.createElement('img');
- cardImg.className = 'card-img-top';
- cardImg.src = '...'; // Add the source URL of the image
- cardImg.alt = '...';
-
- // Create the card body div
- const cardBody = document.createElement('div');
- cardBody.className = 'card-body';
-
- // Create the card title
- const cardTitle = document.createElement('h5');
- cardTitle.className = 'card-title';
- cardTitle.textContent = pizza.name;
-
- // Create the card text paragraph
- const cardText = document.createElement('p');
- cardText.className = 'card-text';
- cardText.textContent = 'Some quick example text to build on the card title and make up the bulk of the card\'s content.';
-
- // Create the button link
- const cardButton = document.createElement('a');
- cardButton.className = 'btn btn-primary';
- cardButton.href = '#';
- cardButton.textContent = 'Go somewhere';
- colBody.appendChild(card);
- card.appendChild(cardBody);
- card.appendChild(cardImg);
-
- // Append the elements to the card body
- cardBody.appendChild(cardTitle);
-
- cardBody.appendChild(cardText);
- cardBody.appendChild(cardButton);
-
- // Append the image and card body to the main card div
-
-
- outputDiv.appendChild(colBody);
-};
- 
+async function showProducts(){
+    const products = await readAllProducts();
+    console.log('Controller rec ', products);
+    for(let product of products){
+        printPizza(product);
+    }
+}
+showProducts();
 
 

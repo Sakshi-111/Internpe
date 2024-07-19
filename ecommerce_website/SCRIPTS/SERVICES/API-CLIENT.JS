@@ -1,30 +1,29 @@
-//NETWORK CALL CODE
-async function doNetworkCall(){
-    const url="https://gist.githubusercontent.com/kshirsagarps/36fade16fa39202715656ef487aaf7b0/raw/2b682e589ef283f06be42d2799dfa54f57794a6e/Pizza.json";
-    
+// Network Call Code
+export default async function doNetworkCall(){
+    const URL = 'https://raw.githubusercontent.com/Skill-risers/pizzajson/main/pizza.json';
     try{
-
-    const response = await fetch(url);
-    console.log('resooponse is',response);
-    const object = await response.json();
-    console.log('object is',object);
-    return object ;
+        // const promise = fetch(URL);
+        // promise.then(response=>{
+        //     const promise2 = response.json();
+        //     promise2.then(json=>console.log(json))
+        //     .catch(e=>console.log('JSON error ', e))
+        // }).catch(e=>console.log(e));
+    const response = await fetch(URL);
+    const object = await response.json(); // Deserialization
+    console.log('Object is ', object);
+    return object; // Wrap Object in Promise
     }
     catch(err){
-        console.log('something went wrong',err);
         throw err;
     }
-
-    // const promise= fetch(url);
+    // const promise = fetch(URL);
+    // console.log('Promise is ', promise);
     // promise.then(function(response){
     //     console.log(response);
-    // })
-    // .catch(function(error){
-    //     console.log("Error: ",error);
-
+    //     return response;
+    // }).catch(function(err){
+    //     console.log('Error ', err);
     // });
-   
-
+    // console.log('Good Bye ');
 
 }
-export default doNetworkCall;
